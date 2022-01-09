@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div class="container" id="myrow">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" id="uploadimg" href="#upload-image">Upload Image</a>
+        </li>
+      </ul>
+
+      <!-- tab panes -->
+      <div class="tab-content">
+          <div class="tab-pane active" id="upload-image" role="tabpanel" aria-labelledby="uploadimg">
+              <div class="row">
+                  <div class="col">
+                      <form action="#" method="POST" enctype="multipart/form-data">
+                        <!-- file input -->
+                        <p>
+                            <input type="file" name="image_name" class="btn"  style="background-color: #2471A3; color:azure ; " required>
+                        </p>
+                        <!-- Submit button -->
+                        <p>
+                            <input type="submit" value="submit" class="btn" style="background-color: #2471A3; color:azure">
+                        </p>
+
+                        <p align="center"> <strong>Intructions:</strong> <br>
+                            Only upload the file with extension ".png", "jpg", ".jpeg"
+                            
+                        </p>
+                    
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>  
+</div>
+
+
+<style>
+    #myrow{
+        background-color:#EBEDEF;
+        color: #BEB93B;
+    }
+    #myrow_result{
+        background-color:#EBEDEF;
+        padding: 5%;
+        align-content: center;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td{
+        border: 1px solid black;
+    }
+</style>
+{% endblock  %}

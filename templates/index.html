@@ -4,15 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/tea.ico" />
     <title>Tea Leaf Disease Identification</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
    
     
 </head>
-<body>
-    <header class="container jumbotron" >Tea Leaf Disease Identification using Machine learning</header>
-    <footer class="container">Developed by<a href="www.github.com/BrianBravoski"> Brian Kemboi</a></footer>
+<body >
+    <nav class="navbar navbar-expand-sm navbar-light bg-dark" >
+        <a class="navbar-brand center" style="color:#BEB93B;" href="#"><img src="../static/images/tea.ico" style="width: 20px; height: 20px;" alt=""> Chai</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </nav>
+
+    <div class="container">
+        <br>
+        <br>
+    <header class="container jumbotron"  style="color:#81D935" >Tea Leaf Disease Identification using Machine learning</header>
+    <br>
+</div>
+    {% block body %}
+    
+    
+    {% endblock body %}
+
+    <hr>
+    <footer class="container"  style="color:#81D935">Developed by<a href="https://www.github.com/BrianBravoski"> Brian Kemboi</a></footer>
     <script src="/static/js/bootstrap.min.js"></script>
 </body>
 </html>
