@@ -35,7 +35,44 @@
           </div>
       </div>  
 </div>
+{% if fileupload %}
 
+<div class="container" id='myrow_result'>
+    <div class="row">
+        <div class="col col-8">
+            <table>
+                <tr>
+                    <th>Label</th>
+                    <th>Confidence Score</th>
+                </tr>
+                {% for name,score in data.items() %}
+                    <tr>
+                        <td>{{ name }}</td>
+                        <td>{{ score }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col col-4">
+            <img src="/static/upload/{{ image_filename }}" alt="uploaded image" width="300" height="{{ height }}">
+
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% if extension %}
+    <div class="container" id=myrow_result>
+        <div class="row">
+            <p>Invalid Extension of the Image </p>
+            <p>Make sure the image extension is of following: ".png", "jpg", ".jpeg"</p>
+
+        </div>
+
+    </div>
+
+{% endif %}
 
 <style>
     #myrow{
