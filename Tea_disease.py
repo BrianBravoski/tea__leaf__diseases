@@ -1,13 +1,23 @@
+import numpy as np
+import tensorflow as tf
 
 
+#from tensorflow import InteractiveSession
 
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.5
+config.gpu_options.allow_growth = True
+session = tf.compat.v1.InteractiveSession(config=config)
 
+from tensorflow.keras.applications.resnet50 import preprocess_input
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 
 
 from flask import Flask, render_template
 from flask import request
 from flask import redirect, url_for
-from flask.wrappers import Request
+#from flask.wrappers import Request
 import os
 
 
@@ -17,9 +27,37 @@ app=Flask(__name__)
 
 BASE_PATH = os.getcwd()
 UPLOAD_PATH = os.path.join(BASE_PATH,'static/upload/')
-MODEL_PATH = os.path.join(BASE_PATH,'static/models/')
+#MODEL_PATH = os.path.join(BASE_PATH,'static/models/')
 
-model_sgd_path = os.path.join(MODEL_PATH,'Tea_leaf.h5')
+model = load_model('static/models/Tea_leaf.h5')
+
+
+def model_predict(img_path, model):
+    print(img_path)
+    img = image.load_img(img_path, target_size=(256, 256))
+
+    # Preprocessing the image
+    x = image.img_to_array(img)
+    # x = np.true_divide(x, 255)
+    ## Scaling
+    x=x/255
+    x = np.expand_dims(x, axis=0)
+
+    preds = model.predict(x)
+    preds=np.argmax(preds, axis=1)
+    if preds==0:
+        preds="healthy_tea"
+        print(preds)
+    elif preds==1:
+        preds="Gray_blight"
+    else:
+        preds="Healthy tea leaf"
+    
+    return preds
+
+
+
+
 
 @app.errorhandler(404)
 def error404(error):
@@ -58,20 +96,16 @@ def upload():
             upload_file.save(path_save)
             print('File saved sucessfully')
             # send to pipeline model
-            results = pipeline_model(path_save,scaler,model_sgd)
-            hei = getheight(path_save)
-            print(results)
-            return render_template('upload.html',fileupload=True,extension=False,data=results,image_filename=filename,height=hei)
-
-
-
+            preds = model_predict(path_save, model)
+            result=preds
+            return result
             
         else:
             print('Use only the extension with .jpg, .png, .jpeg')
 
-            return render_template('upload.html',extension=True,fileupload=False)
+            return render_template('upload.html')
     else:
-        return render_template('upload.html',fileupload=False,extension=False)
+            return render_template('upload.html')
 
 
 
