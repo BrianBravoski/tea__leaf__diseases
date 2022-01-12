@@ -14,17 +14,22 @@
           <div class="tab-pane active" id="upload-image" role="tabpanel" aria-labelledby="uploadimg">
               <div class="row">
                   <div class="col">
-                      <form action="#" method="POST" enctype="multipart/form-data">
+                      <form action="#" method="POST" enctype="multipart/form-data" id="upload-file">
                         <!-- file input -->
                         <p>
-                            <input type="file" name="image_name" class="btn"  style="background-color: #2471A3; color:azure ; " required>
+
+                            <input type="file" name="image_name" class="btn" id="imageUpload" style="background-color: #2471A3; color:azure ; " required>
                         </p>
+                        <div class="img-preview">
+                            <div id="imagePreview">
+                            </div>
+                        </div>
+
                         <!-- Submit button -->
-                        <p>
-                            <input type="submit" value="submit" class="btn" style="background-color: #2471A3; color:azure">
+                            <input type="submit" value="Detect disease" id="btn-detect"class="btn" style="background-color: #2471A3; color:azure">
                         </p>
 
-                        <p align="center"> <strong>Intructions:</strong> <br>
+                        <p align="center"> <strong>Instructions:</strong> <br>
                             Only upload the file with extension ".png", "jpg", ".jpeg"
                             
                         </p>
@@ -37,22 +42,8 @@
 </div>
 {% if fileupload %}
 
-<div class="container" id='myrow_result'>
-    <div class="row">
-        <div class="col col-8">
-            <table>
-                <tr>
-                    <th>Label</th>
-                    <th>Confidence Score</th>
-                </tr>
-                {% for name,score in data.items() %}
-                    <tr>
-                        <td>{{ name }}</td>
-                        <td>{{ score }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+<div class="container" id='result'>
+    <span> </span>
         <div class="col col-4">
             <img src="/static/upload/{{ image_filename }}" alt="uploaded image" width="300" height="{{ height }}">
 
@@ -91,5 +82,22 @@
     table, th, td{
         border: 1px solid black;
     }
+    .img-preview {
+    width: 256px;
+    height: 256px;
+    position: center;
+    border: 5px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    margin-top: 1em;
+    margin-bottom: 1em;    
+}
+
+.img-preview>div {
+    width: 100%;
+    height: 100%;
+    background-size: 256px 256px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 </style>
 {% endblock  %}
