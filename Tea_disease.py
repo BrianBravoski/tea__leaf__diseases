@@ -1,6 +1,9 @@
 import numpy as np
 import tensorflow as tf
-
+import sys
+import os
+import glob
+import re
 
 #from tensorflow import InteractiveSession
 
@@ -27,7 +30,6 @@ app=Flask(__name__)
 
 BASE_PATH = os.getcwd()
 UPLOAD_PATH = os.path.join(BASE_PATH,'static/upload/')
-#MODEL_PATH = os.path.join(BASE_PATH,'static/models/')
 
 model = load_model('static/models/Tea_leaf.h5')
 
@@ -46,12 +48,12 @@ def model_predict(img_path, model):
     preds = model.predict(x)
     preds=np.argmax(preds, axis=1)
     if preds==0:
-        preds="healthy_tea"
+        preds="Brown_Blight"
         print(preds)
     elif preds==1:
         preds="Gray_blight"
     else:
-        preds="Healthy tea leaf"
+        preds="healthy tea leaf"
     
     return preds
 

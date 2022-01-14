@@ -4,3 +4,14 @@ header{
     font-weight: bold;
     text-align: center;
 }
+
+
+/* The Jumbotron image and text */
+.bg-image{
+ background-image: url(../static/images/tea_hand.jpg);
+
+ filter: blur(8px);
+
+ height: 100%;
+
+}
