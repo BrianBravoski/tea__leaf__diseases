@@ -30,7 +30,7 @@ $(document).ready(function () {
             processData: false,
             async: true,
             success: function (data) {
-                // Get and display the result
+             
                 
                 
                 $('#result').text(' Result:  ' + data);
